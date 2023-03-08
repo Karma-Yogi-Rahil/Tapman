@@ -52,7 +52,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.guna2Shapes1 = new Guna.UI2.WinForms.Guna2Shapes();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.guna2GroupBox1.SuspendLayout();
@@ -145,7 +144,7 @@
             this.guna2ImageButton1.ImageOffset = new System.Drawing.Point(0, 0);
             this.guna2ImageButton1.ImageRotate = 0F;
             this.guna2ImageButton1.ImageSize = new System.Drawing.Size(32, 32);
-            this.guna2ImageButton1.Location = new System.Drawing.Point(12, 180);
+            this.guna2ImageButton1.Location = new System.Drawing.Point(12, 311);
             this.guna2ImageButton1.Name = "guna2ImageButton1";
             this.guna2ImageButton1.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.guna2ImageButton1.Size = new System.Drawing.Size(42, 55);
@@ -154,10 +153,12 @@
             // 
             // guna2GroupBox1
             // 
+            this.guna2GroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2GroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(21)))), ((int)(((byte)(60)))));
             this.guna2GroupBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(21)))), ((int)(((byte)(60)))));
             this.guna2GroupBox1.BorderRadius = 15;
-            this.guna2GroupBox1.Controls.Add(this.guna2Shapes1);
             this.guna2GroupBox1.Controls.Add(this.label4);
             this.guna2GroupBox1.Controls.Add(this.label3);
             this.guna2GroupBox1.Controls.Add(this.label2);
@@ -180,7 +181,7 @@
             // 
             // guna2VProgressBar1
             // 
-            this.guna2VProgressBar1.Location = new System.Drawing.Point(373, 43);
+            this.guna2VProgressBar1.Location = new System.Drawing.Point(372, 59);
             this.guna2VProgressBar1.Name = "guna2VProgressBar1";
             this.guna2VProgressBar1.Size = new System.Drawing.Size(25, 130);
             this.guna2VProgressBar1.TabIndex = 1;
@@ -191,40 +192,50 @@
             // 
             this.CpuLoadProgressBar.BackColor = System.Drawing.Color.Transparent;
             this.CpuLoadProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+            this.CpuLoadProgressBar.FillThickness = 12;
             this.CpuLoadProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.CpuLoadProgressBar.ForeColor = System.Drawing.Color.Transparent;
-            this.CpuLoadProgressBar.Location = new System.Drawing.Point(202, 43);
+            this.CpuLoadProgressBar.Location = new System.Drawing.Point(202, 59);
             this.CpuLoadProgressBar.Minimum = 0;
             this.CpuLoadProgressBar.Name = "CpuLoadProgressBar";
-            this.CpuLoadProgressBar.ProgressThickness = 17;
+            this.CpuLoadProgressBar.ProgressThickness = 12;
             this.CpuLoadProgressBar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.CpuLoadProgressBar.Size = new System.Drawing.Size(130, 130);
             this.CpuLoadProgressBar.TabIndex = 0;
             this.CpuLoadProgressBar.Text = "LoadProgressBar";
+            this.CpuLoadProgressBar.Value = 10;
             this.CpuLoadProgressBar.ValueChanged += new System.EventHandler(this.CpuLoadProgressBar_ValueChanged);
             // 
             // CpuTempProgressBar
             // 
             this.CpuTempProgressBar.Controls.Add(this.CurrentTempLabel);
             this.CpuTempProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
+            this.CpuTempProgressBar.FillThickness = 12;
             this.CpuTempProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.CpuTempProgressBar.ForeColor = System.Drawing.Color.White;
-            this.CpuTempProgressBar.Location = new System.Drawing.Point(45, 43);
+            this.CpuTempProgressBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(50)))), ((int)(((byte)(145)))));
+            this.CpuTempProgressBar.Location = new System.Drawing.Point(36, 59);
             this.CpuTempProgressBar.Minimum = 0;
             this.CpuTempProgressBar.Name = "CpuTempProgressBar";
+            this.CpuTempProgressBar.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(78)))), ((int)(((byte)(230)))));
+            this.CpuTempProgressBar.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(121)))), ((int)(((byte)(78)))), ((int)(((byte)(230)))));
+            this.CpuTempProgressBar.ProgressThickness = 12;
             this.CpuTempProgressBar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.CpuTempProgressBar.Size = new System.Drawing.Size(130, 130);
             this.CpuTempProgressBar.TabIndex = 0;
             this.CpuTempProgressBar.Text = "CpuTempProgressBar";
+            this.CpuTempProgressBar.Value = 25;
             this.CpuTempProgressBar.ValueChanged += new System.EventHandler(this.CpuTempProgressBar_ValueChanged);
             // 
             // CurrentTempLabel
             // 
             this.CurrentTempLabel.AutoSize = true;
-            this.CurrentTempLabel.Location = new System.Drawing.Point(57, 51);
+            this.CurrentTempLabel.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurrentTempLabel.ForeColor = System.Drawing.Color.Crimson;
+            this.CurrentTempLabel.Location = new System.Drawing.Point(22, 48);
             this.CurrentTempLabel.Name = "CurrentTempLabel";
-            this.CurrentTempLabel.Size = new System.Drawing.Size(0, 21);
+            this.CurrentTempLabel.Size = new System.Drawing.Size(86, 40);
             this.CurrentTempLabel.TabIndex = 0;
+            this.CurrentTempLabel.Text = "00 °C";
             // 
             // guna2GroupBox2
             // 
@@ -289,7 +300,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 231);
+            this.label2.Location = new System.Drawing.Point(10, 240);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 24);
             this.label2.TabIndex = 3;
@@ -316,26 +327,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 190);
+            this.label1.Location = new System.Drawing.Point(6, 204);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 24);
             this.label1.TabIndex = 2;
             this.label1.Text = "Max";
-            // 
-            // guna2Shapes1
-            // 
-            this.guna2Shapes1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Shapes1.FillColor = System.Drawing.Color.Red;
-            this.guna2Shapes1.Location = new System.Drawing.Point(75, 204);
-            this.guna2Shapes1.Name = "guna2Shapes1";
-            this.guna2Shapes1.PolygonSkip = 1;
-            this.guna2Shapes1.Rotate = 0F;
-            this.guna2Shapes1.Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse;
-            this.guna2Shapes1.Size = new System.Drawing.Size(10, 10);
-            this.guna2Shapes1.TabIndex = 6;
-            this.guna2Shapes1.Text = "guna2Shapes1";
-            this.guna2Shapes1.UseTransparentBackground = true;
-            this.guna2Shapes1.Zoom = 80;
             // 
             // Form1
             // 
@@ -385,7 +381,6 @@
         private Guna.UI2.WinForms.Guna2VProgressBar guna2VProgressBar1;
         private Guna.UI2.WinForms.Guna2CircleProgressBar CpuLoadProgressBar;
         private System.Windows.Forms.Label CurrentTempLabel;
-        private Guna.UI2.WinForms.Guna2Shapes guna2Shapes1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

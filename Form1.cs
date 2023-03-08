@@ -55,10 +55,12 @@ namespace Tapman
                                 try
                                 {
                                     var temp = ((sensor.Value));
-                                    
-                                    CpuTempProgressBar.Value = (int)temp;
+                                CpuLoadProgressBar.Maximum = (int)sensor.Max;
+                                CpuLoadProgressBar.Minimum = (int)sensor.Min;
+                                CpuTempProgressBar.Value = (int)temp;
+                                
                                     guna2HtmlToolTip1.SetToolTip(CpuLoadProgressBar,temp.ToString());
-                                CurrentTempLabel.Text = temp.ToString();
+                                CurrentTempLabel.Text = temp.ToString() + " °C";
                                     //guna2HtmlLabel1.Text = temp.ToString();
                                     //guna2HtmlLabel2.Text = sensor.Max.ToString();
                                     //guna2GroupBox1.Text = sensor.Name.ToString();
