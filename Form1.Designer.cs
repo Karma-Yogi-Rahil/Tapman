@@ -203,7 +203,7 @@
             this.CpuLoadProgressBar.Size = new System.Drawing.Size(130, 130);
             this.CpuLoadProgressBar.TabIndex = 0;
             this.CpuLoadProgressBar.Text = "LoadProgressBar";
-            this.CpuLoadProgressBar.Value = 10;
+            this.CpuLoadProgressBar.Value = 40;
             this.CpuLoadProgressBar.ValueChanged += new System.EventHandler(this.CpuLoadProgressBar_ValueChanged);
             // 
             // CpuTempProgressBar
