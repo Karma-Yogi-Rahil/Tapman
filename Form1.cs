@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace Tapman
 {
-    public partial class Form1 : Form
+    public partial class TapmanUI : Form
     {
 
         private Computer computer;
 
         private Timer timer;
-        public Form1()
+        public TapmanUI()
         {
             InitializeComponent();
             computer = new Computer();
@@ -44,75 +44,154 @@ namespace Tapman
             foreach (var hardwareItem in computer.Hardware)
             {
                 hardwareItem.Update();
-                if (hardwareItem.HardwareType == HardwareType.CPU)
+
+                switch (hardwareItem.HardwareType)
                 {
-                    foreach (var sensor in hardwareItem.Sensors)
-                    {
-                        if (sensor.SensorType == SensorType.Temperature)
-                        {
-                            //CpuTempLabel.Text = $"{sensor.Value.Value:N1} C";
-                           
-                                try
-                                {
-                                    var temp = ((sensor.Value));
-                                CpuLoadProgressBar.Maximum = (int)sensor.Max;
-                                CpuLoadProgressBar.Minimum = (int)sensor.Min;
-                                CpuTempProgressBar.Value = (int)temp;
-                                
-                                    guna2HtmlToolTip1.SetToolTip(CpuLoadProgressBar,temp.ToString());
-                                CurrentTempLabel.Text = temp.ToString() + " °C";
-                                    //guna2HtmlLabel1.Text = temp.ToString();
-                                    //guna2HtmlLabel2.Text = sensor.Max.ToString();
-                                    //guna2GroupBox1.Text = sensor.Name.ToString();
-                                }
-                                catch (Exception ex)
-                                {
-                                    //MessageBox.Show(ex.Message);
-                                }
+                    case (HardwareType.CPU):
+                        UpdateCpuDetails(hardwareItem); break;
 
+                    case (HardwareType.RAM):
+                        UpdateRamDetails(hardwareItem); break;
 
-                            
-                            
-                        }
-                        else if (sensor.SensorType == SensorType.Load)
-                        {
-                            var load = ((sensor.Value));
-                            CpuLoadProgressBar.Value = (int)load;
-                        }
-                        else if (sensor.SensorType == SensorType.Voltage)
-                        {
-                            var fanspeed = ((sensor.Value));
-                            //guna2CircleProgressBar1.Value = (int)fanspeed;
-                        }
-                    }
+                    case (HardwareType.GpuNvidia):
+                        UpdateGpuDetails(hardwareItem); break;
+
+                    case(HardwareType.GpuAti): UpdateGpuDetails(hardwareItem); break;
+
+                    case (HardwareType.HDD):
+                       UpdateStorageDetails(hardwareItem); break;
                 }
-                else if (hardwareItem.HardwareType == HardwareType.GpuNvidia || hardwareItem.HardwareType == HardwareType.GpuAti)
-                {
-                    foreach (var sensor in hardwareItem.Sensors)
-                    {
 
-                    }
-                }
+                //if (hardwareItem.HardwareType == HardwareType.CPU)
+                //{
+                //    CpuNameTitle.Text = $"CPU : {hardwareItem.Name}";
+                //    foreach (var sensor in hardwareItem.Sensors)
+                //    {
+
+                //        if (sensor.SensorType == SensorType.Temperature)
+                //        {
+                //            //CpuTempLabel.Text = $"{sensor.Value.Value:N1} C";
+
+
+                //            try
+                //            {
+                //                var temp = ((sensor.Value));
+                //                //CpuLoadProgressBar.Maximum = (int)sensor.Max;
+                //                //CpuLoadProgressBar.Minimum = (int)sensor.Min;
+                //                //CpuTempProgressBar.Value = (int)temp;
+
+                //                //    guna2HtmlToolTip1.SetToolTip(CpuLoadProgressBar,temp.ToString());
+                //                //CurrentTempLabel.Text = temp.ToString() + " °C";
+                //                //guna2HtmlLabel1.Text = temp.ToString();
+                //                //guna2HtmlLabel2.Text = sensor.Max.ToString();
+                //                //guna2GroupBox1.Text = sensor.Name.ToString();
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                //MessageBox.Show(ex.Message);
+                //            }
+
+
+
+
+                //        }
+                //        else if (sensor.SensorType == SensorType.Load)
+                //        {
+                //            var load = ((sensor.Value));
+                //            //CpuLoadProgressBar.Value = (int)load;
+                //        }
+                //        else if (sensor.SensorType == SensorType.Voltage)
+                //        {
+                //            var fanspeed = ((sensor.Value));
+                //            //guna2CircleProgressBar1.Value = (int)fanspeed;
+                //        }
+                //    }
+                //}
+                //else if (hardwareItem.HardwareType == HardwareType.GpuNvidia || hardwareItem.HardwareType == HardwareType.GpuAti)
+                //{
+                //    foreach (var sensor in hardwareItem.Sensors)
+                //    {
+
+                //    }
+                //}
             }
         }
 
+        private void UpdateCpuDetails(IHardware cpu)
+        {
+            try
+            {
+                CpuNameTitle.Text = $"CPU : {cpu.Name}";
+                foreach (var sensor in cpu.Sensors)
+                {
+                    if (sensor.SensorType == SensorType.Temperature)
+                    {
+                        try
+                        {
+                            var temp = ((sensor.Value));
+                            CpuTempLabel.Text = string.Format("{0}°C", temp); ;
+                            CpuAvgTempProgressBar.Value = (int)temp;
+                            CpuMaxTempProgressBar.Value = (int)sensor.Max;
+                            CpuMinTempProgressBar.Value = (int)sensor.Min;
 
-        private void guna2GroupBox1_Click(object sender, EventArgs e)
+                        }
+                        catch(Exception ex) 
+                        {
+                            CpuTempLabel.Text = string.Format("{0}°C", 0); ;
+                            CpuAvgTempProgressBar.Value = 0;
+                            CpuMaxTempProgressBar.Value = 0;
+                            CpuMinTempProgressBar.Value = 0;
+
+                        }
+                        
+                        
+                        //CpuTempLabel.Text = (temp+ ""+"C");
+
+                        //CpuLoadProgressBar.Maximum = (int)sensor.Max;
+                        //CpuLoadProgressBar.Minimum = (int)sensor.Min;
+                        //CpuTempProgressBar.Value = (int)temp;
+                    }
+                    else if (sensor.SensorType == SensorType.Load)
+                    {
+                        CpuAvgLoadProgressBar.Value = (int)sensor.Value;
+                        CpuMaxLoadProgressBar.Value = (int)sensor.Max;
+                        CpuMinLoadProgressBar.Value = (int)sensor.Min;
+
+                        CpuAvgLoadLabel.Text = string.Format(" {0:00} %", sensor.Value);
+                        ;
+                    }
+                    else if (sensor.SensorType == SensorType.Power && sensor.Name == "CPU Package")
+                    {
+                        CpuAvgPowerProgressBar.Maximum = (int)sensor.Max;
+                        
+                       // CpuAvgPowerProgressBar.Value = (int)sensor.Value;
+                       CpuMaxPowerProgressBar.Maximum= (int)sensor.Max;
+                        CpuMaxPowerProgressBar.Value = (int)sensor.Max;
+                        CpuMinPowerProgressBar.Value = (int)sensor.Min;
+                        CpuAvgPowerProgressBar.Value = (int)sensor.Value;
+                    }
+
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        private void UpdateRamDetails(IHardware ram)
         {
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void UpdateStorageDetails(IHardware storage)
         {
 
         }
 
-        private void CpuLoadProgressBar_ValueChanged(object sender, EventArgs e)
+        private void UpdateGpuDetails(IHardware gpu)
         {
-
+            try { }catch (Exception ex) { }
         }
 
-        private void CpuTempProgressBar_ValueChanged(object sender, EventArgs e)
+        private void RamGroupBox_Click(object sender, EventArgs e)
         {
 
         }
