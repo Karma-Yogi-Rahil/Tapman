@@ -44,13 +44,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.CpuNameTitle = new System.Windows.Forms.Label();
             this.CpuAvgLoadProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
+            this.CpuAvgLoadLabel = new System.Windows.Forms.Label();
             this.CpuMaxLoadProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.CpuAvgPowerProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
+            this.CpuAvgPowerLabel = new System.Windows.Forms.Label();
             this.CpuMinLoadProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.CpuAvgLoadLabel = new System.Windows.Forms.Label();
             this.CpuMaxPowerProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.CpuMinPowerProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.label3 = new System.Windows.Forms.Label();
             this.CpuAvgTempProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.CpuMaxTempProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.CpuMinTempProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
@@ -64,14 +64,14 @@
             this.GpuMaxLoadProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.GpuAvgPowerProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.GpuMinLoadProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.label4 = new System.Windows.Forms.Label();
+            this.GpuAvgLoadLabel = new System.Windows.Forms.Label();
             this.GpuMaxPowerProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.GpuMinPowerProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
+            this.GpuAvgPowerLabel = new System.Windows.Forms.Label();
             this.GpuAvgTempProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.GpuMaxTempProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.GpuMinTempProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
+            this.GpuAvgTempLabel = new System.Windows.Forms.Label();
             this.StorageRoundConner = new Guna.UI2.WinForms.Guna2GroupBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -91,11 +91,11 @@
             this.RamAvgLoadProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.RamMaxLoadProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.RamMinLoadProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.label10 = new System.Windows.Forms.Label();
+            this.RamAvgTitle = new System.Windows.Forms.Label();
             this.RamAvgDataProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.RamMaxDataProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
             this.RamMinDataProgressBar = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.label12 = new System.Windows.Forms.Label();
+            this.RamAvgDataLabel = new System.Windows.Forms.Label();
             this.GpuRoundConner = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.CpuRoundConner = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
@@ -108,7 +108,7 @@
             this.guna2Panel2.SuspendLayout();
             this.CpuGroupBox.SuspendLayout();
             this.CpuAvgLoadProgressBar.SuspendLayout();
-            this.CpuMinPowerProgressBar.SuspendLayout();
+            this.CpuAvgPowerProgressBar.SuspendLayout();
             this.CpuMinTempProgressBar.SuspendLayout();
             this.GpuGroupBox.SuspendLayout();
             this.GpuMinLoadProgressBar.SuspendLayout();
@@ -325,6 +325,17 @@
             this.CpuAvgLoadProgressBar.UseTransparentBackground = true;
             this.CpuAvgLoadProgressBar.Value = 65;
             // 
+            // CpuAvgLoadLabel
+            // 
+            this.CpuAvgLoadLabel.AutoSize = true;
+            this.CpuAvgLoadLabel.BackColor = System.Drawing.Color.Transparent;
+            this.CpuAvgLoadLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CpuAvgLoadLabel.Location = new System.Drawing.Point(54, 71);
+            this.CpuAvgLoadLabel.Name = "CpuAvgLoadLabel";
+            this.CpuAvgLoadLabel.Size = new System.Drawing.Size(53, 24);
+            this.CpuAvgLoadLabel.TabIndex = 1;
+            this.CpuAvgLoadLabel.Text = "00 %";
+            // 
             // CpuMaxLoadProgressBar
             // 
             this.CpuMaxLoadProgressBar.BackColor = System.Drawing.Color.Transparent;
@@ -348,6 +359,7 @@
             // CpuAvgPowerProgressBar
             // 
             this.CpuAvgPowerProgressBar.BackColor = System.Drawing.Color.Transparent;
+            this.CpuAvgPowerProgressBar.Controls.Add(this.CpuAvgPowerLabel);
             this.CpuAvgPowerProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(23)))));
             this.CpuAvgPowerProgressBar.FillThickness = 17;
             this.CpuAvgPowerProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -366,6 +378,17 @@
             this.CpuAvgPowerProgressBar.Text = "guna2CircleProgressBar10";
             this.CpuAvgPowerProgressBar.UseTransparentBackground = true;
             this.CpuAvgPowerProgressBar.Value = 65;
+            // 
+            // CpuAvgPowerLabel
+            // 
+            this.CpuAvgPowerLabel.AutoSize = true;
+            this.CpuAvgPowerLabel.BackColor = System.Drawing.Color.Transparent;
+            this.CpuAvgPowerLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CpuAvgPowerLabel.Location = new System.Drawing.Point(54, 71);
+            this.CpuAvgPowerLabel.Name = "CpuAvgPowerLabel";
+            this.CpuAvgPowerLabel.Size = new System.Drawing.Size(59, 24);
+            this.CpuAvgPowerLabel.TabIndex = 1;
+            this.CpuAvgPowerLabel.Text = "00 W";
             // 
             // CpuMinLoadProgressBar
             // 
@@ -386,17 +409,6 @@
             this.CpuMinLoadProgressBar.TabIndex = 9;
             this.CpuMinLoadProgressBar.Text = "guna2CircleProgressBar27";
             this.CpuMinLoadProgressBar.Value = 13;
-            // 
-            // CpuAvgLoadLabel
-            // 
-            this.CpuAvgLoadLabel.AutoSize = true;
-            this.CpuAvgLoadLabel.BackColor = System.Drawing.Color.Transparent;
-            this.CpuAvgLoadLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CpuAvgLoadLabel.Location = new System.Drawing.Point(54, 71);
-            this.CpuAvgLoadLabel.Name = "CpuAvgLoadLabel";
-            this.CpuAvgLoadLabel.Size = new System.Drawing.Size(53, 24);
-            this.CpuAvgLoadLabel.TabIndex = 1;
-            this.CpuAvgLoadLabel.Text = "00 %";
             // 
             // CpuMaxPowerProgressBar
             // 
@@ -422,7 +434,6 @@
             // 
             // CpuMinPowerProgressBar
             // 
-            this.CpuMinPowerProgressBar.Controls.Add(this.label3);
             this.CpuMinPowerProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(23)))));
             this.CpuMinPowerProgressBar.FillThickness = 17;
             this.CpuMinPowerProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -440,17 +451,6 @@
             this.CpuMinPowerProgressBar.TabIndex = 3;
             this.CpuMinPowerProgressBar.Text = "guna2CircleProgressBar12";
             this.CpuMinPowerProgressBar.Value = 13;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(20, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 24);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "00  C";
             // 
             // CpuAvgTempProgressBar
             // 
@@ -668,7 +668,7 @@
             // 
             // GpuMinLoadProgressBar
             // 
-            this.GpuMinLoadProgressBar.Controls.Add(this.label4);
+            this.GpuMinLoadProgressBar.Controls.Add(this.GpuAvgLoadLabel);
             this.GpuMinLoadProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(23)))));
             this.GpuMinLoadProgressBar.FillThickness = 17;
             this.GpuMinLoadProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -687,16 +687,16 @@
             this.GpuMinLoadProgressBar.Text = "guna2CircleProgressBar13";
             this.GpuMinLoadProgressBar.Value = 13;
             // 
-            // label4
+            // GpuAvgLoadLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(20, 38);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 24);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "00  C";
+            this.GpuAvgLoadLabel.AutoSize = true;
+            this.GpuAvgLoadLabel.BackColor = System.Drawing.Color.Transparent;
+            this.GpuAvgLoadLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GpuAvgLoadLabel.Location = new System.Drawing.Point(20, 38);
+            this.GpuAvgLoadLabel.Name = "GpuAvgLoadLabel";
+            this.GpuAvgLoadLabel.Size = new System.Drawing.Size(60, 24);
+            this.GpuAvgLoadLabel.TabIndex = 1;
+            this.GpuAvgLoadLabel.Text = "00  %";
             // 
             // GpuMaxPowerProgressBar
             // 
@@ -722,7 +722,7 @@
             // 
             // GpuMinPowerProgressBar
             // 
-            this.GpuMinPowerProgressBar.Controls.Add(this.label5);
+            this.GpuMinPowerProgressBar.Controls.Add(this.GpuAvgPowerLabel);
             this.GpuMinPowerProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(23)))));
             this.GpuMinPowerProgressBar.FillThickness = 17;
             this.GpuMinPowerProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -741,16 +741,16 @@
             this.GpuMinPowerProgressBar.Text = "guna2CircleProgressBar15";
             this.GpuMinPowerProgressBar.Value = 13;
             // 
-            // label5
+            // GpuAvgPowerLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(20, 38);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 24);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "00  C";
+            this.GpuAvgPowerLabel.AutoSize = true;
+            this.GpuAvgPowerLabel.BackColor = System.Drawing.Color.Transparent;
+            this.GpuAvgPowerLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GpuAvgPowerLabel.Location = new System.Drawing.Point(20, 38);
+            this.GpuAvgPowerLabel.Name = "GpuAvgPowerLabel";
+            this.GpuAvgPowerLabel.Size = new System.Drawing.Size(59, 24);
+            this.GpuAvgPowerLabel.TabIndex = 1;
+            this.GpuAvgPowerLabel.Text = "00 W";
             // 
             // GpuAvgTempProgressBar
             // 
@@ -798,7 +798,7 @@
             // 
             // GpuMinTempProgressBar
             // 
-            this.GpuMinTempProgressBar.Controls.Add(this.label6);
+            this.GpuMinTempProgressBar.Controls.Add(this.GpuAvgTempLabel);
             this.GpuMinTempProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(23)))));
             this.GpuMinTempProgressBar.FillThickness = 17;
             this.GpuMinTempProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -817,16 +817,16 @@
             this.GpuMinTempProgressBar.Text = "guna2CircleProgressBar18";
             this.GpuMinTempProgressBar.Value = 13;
             // 
-            // label6
+            // GpuAvgTempLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(20, 38);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 24);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "00  C";
+            this.GpuAvgTempLabel.AutoSize = true;
+            this.GpuAvgTempLabel.BackColor = System.Drawing.Color.Transparent;
+            this.GpuAvgTempLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GpuAvgTempLabel.Location = new System.Drawing.Point(20, 38);
+            this.GpuAvgTempLabel.Name = "GpuAvgTempLabel";
+            this.GpuAvgTempLabel.Size = new System.Drawing.Size(64, 24);
+            this.GpuAvgTempLabel.TabIndex = 1;
+            this.GpuAvgTempLabel.Text = "00  C";
             // 
             // StorageRoundConner
             // 
@@ -1143,7 +1143,7 @@
             // 
             // RamMinLoadProgressBar
             // 
-            this.RamMinLoadProgressBar.Controls.Add(this.label10);
+            this.RamMinLoadProgressBar.Controls.Add(this.RamAvgTitle);
             this.RamMinLoadProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(23)))));
             this.RamMinLoadProgressBar.FillThickness = 17;
             this.RamMinLoadProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -1162,16 +1162,16 @@
             this.RamMinLoadProgressBar.Text = "guna2CircleProgressBar31";
             this.RamMinLoadProgressBar.Value = 13;
             // 
-            // label10
+            // RamAvgTitle
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(20, 38);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(64, 24);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "00  C";
+            this.RamAvgTitle.AutoSize = true;
+            this.RamAvgTitle.BackColor = System.Drawing.Color.Transparent;
+            this.RamAvgTitle.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RamAvgTitle.Location = new System.Drawing.Point(20, 38);
+            this.RamAvgTitle.Name = "RamAvgTitle";
+            this.RamAvgTitle.Size = new System.Drawing.Size(53, 24);
+            this.RamAvgTitle.TabIndex = 1;
+            this.RamAvgTitle.Text = "00 %";
             // 
             // RamAvgDataProgressBar
             // 
@@ -1219,7 +1219,7 @@
             // 
             // RamMinDataProgressBar
             // 
-            this.RamMinDataProgressBar.Controls.Add(this.label12);
+            this.RamMinDataProgressBar.Controls.Add(this.RamAvgDataLabel);
             this.RamMinDataProgressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(23)))));
             this.RamMinDataProgressBar.FillThickness = 17;
             this.RamMinDataProgressBar.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -1238,16 +1238,16 @@
             this.RamMinDataProgressBar.Text = "guna2CircleProgressBar36";
             this.RamMinDataProgressBar.Value = 13;
             // 
-            // label12
+            // RamAvgDataLabel
             // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(20, 38);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(64, 24);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "00  C";
+            this.RamAvgDataLabel.AutoSize = true;
+            this.RamAvgDataLabel.BackColor = System.Drawing.Color.Transparent;
+            this.RamAvgDataLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RamAvgDataLabel.Location = new System.Drawing.Point(15, 38);
+            this.RamAvgDataLabel.Name = "RamAvgDataLabel";
+            this.RamAvgDataLabel.Size = new System.Drawing.Size(72, 24);
+            this.RamAvgDataLabel.TabIndex = 1;
+            this.RamAvgDataLabel.Text = "00 GB";
             // 
             // GpuRoundConner
             // 
@@ -1307,14 +1307,15 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TapmanUI";
             this.Text = "+";
+            this.Load += new System.EventHandler(this.TapmanUI_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel2.ResumeLayout(false);
             this.CpuGroupBox.ResumeLayout(false);
             this.CpuGroupBox.PerformLayout();
             this.CpuAvgLoadProgressBar.ResumeLayout(false);
             this.CpuAvgLoadProgressBar.PerformLayout();
-            this.CpuMinPowerProgressBar.ResumeLayout(false);
-            this.CpuMinPowerProgressBar.PerformLayout();
+            this.CpuAvgPowerProgressBar.ResumeLayout(false);
+            this.CpuAvgPowerProgressBar.PerformLayout();
             this.CpuMinTempProgressBar.ResumeLayout(false);
             this.CpuMinTempProgressBar.PerformLayout();
             this.GpuGroupBox.ResumeLayout(false);
@@ -1356,25 +1357,25 @@
         private Guna.UI2.WinForms.Guna2CircleProgressBar RamAvgLoadProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar RamMaxLoadProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar RamMinLoadProgressBar;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label RamAvgTitle;
         private Guna.UI2.WinForms.Guna2CircleProgressBar RamAvgDataProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar RamMaxDataProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar RamMinDataProgressBar;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label RamAvgDataLabel;
         private Guna.UI2.WinForms.Guna2GroupBox StorageRoundConner;
         private Guna.UI2.WinForms.Guna2GroupBox GpuGroupBox;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuAvgLoadProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuMaxLoadProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuAvgPowerProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuMinLoadProgressBar;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label GpuAvgLoadLabel;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuMaxPowerProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuMinPowerProgressBar;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label GpuAvgPowerLabel;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuAvgTempProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuMaxTempProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuMinTempProgressBar;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label GpuAvgTempLabel;
         private Guna.UI2.WinForms.Guna2CircleProgressBar HddAvgTempProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar HddMaxTempProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar HddMinTempProgressBar;
@@ -1386,7 +1387,7 @@
         private System.Windows.Forms.Label CpuAvgLoadLabel;
         private Guna.UI2.WinForms.Guna2CircleProgressBar CpuMaxPowerProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar CpuMinPowerProgressBar;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label CpuAvgPowerLabel;
         private Guna.UI2.WinForms.Guna2CircleProgressBar CpuAvgTempProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar CpuMaxTempProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar CpuMinTempProgressBar;
