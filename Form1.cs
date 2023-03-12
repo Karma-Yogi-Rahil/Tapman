@@ -242,6 +242,13 @@ namespace Tapman
                 }
             }
 
+            if(RamAvgDataProgressBar.Value== RamMinDataProgressBar.Value)
+            {
+                RamAvgDataProgressBar.Animated = true;
+                RamMinDataProgressBar.Animated = true;
+            }
+           
+
 
         }
 
@@ -249,7 +256,7 @@ namespace Tapman
         {
             if(storageDrives.Count > 1)
             {
-
+                ////
 
             }
             else
