@@ -97,6 +97,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.RecordData = new Guna.UI2.WinForms.Guna2CheckBox();
             this.DashboardUIPannel = new Guna.UI2.WinForms.Guna2Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.gunaLineDataset1 = new Guna.Charts.WinForms.GunaLineDataset();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.GpuGroupBox.SuspendLayout();
@@ -1208,6 +1210,7 @@
             // 
             // DashboardUIPannel
             // 
+            this.DashboardUIPannel.Controls.Add(this.panel1);
             this.DashboardUIPannel.Controls.Add(this.RamGroupBox);
             this.DashboardUIPannel.Controls.Add(this.CpuGroupBox);
             this.DashboardUIPannel.Controls.Add(this.StorageRoundConner);
@@ -1216,6 +1219,22 @@
             this.DashboardUIPannel.Name = "DashboardUIPannel";
             this.DashboardUIPannel.Size = new System.Drawing.Size(1090, 624);
             this.DashboardUIPannel.TabIndex = 12;
+            // 
+            // panel1
+            // 
+            this.panel1.Enabled = false;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1099, 621);
+            this.panel1.TabIndex = 13;
+            this.panel1.Visible = false;
+            // 
+            // gunaLineDataset1
+            // 
+            this.gunaLineDataset1.BorderColor = System.Drawing.Color.Empty;
+            this.gunaLineDataset1.FillColor = System.Drawing.Color.Empty;
+            this.gunaLineDataset1.IndexLabelForeColor = System.Drawing.Color.DarkGray;
+            this.gunaLineDataset1.Label = "Line1";
             // 
             // TapmanUI
             // 
@@ -1398,6 +1417,8 @@
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuMaxTempProgressBar;
         private Guna.UI2.WinForms.Guna2CircleProgressBar GpuMinTempProgressBar;
         private System.Windows.Forms.Label GpuAvgTempLabel;
+        private System.Windows.Forms.Panel panel1;
+        private Guna.Charts.WinForms.GunaLineDataset gunaLineDataset1;
     }
 }
 

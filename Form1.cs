@@ -420,15 +420,21 @@ namespace Tapman
         {
            DashboardUIPannel.Enabled = false;
             DashboardUIPannel.Visible = false;
-           
 
+            panel1.Enabled = true;
+            panel1.Visible = true;
         }
 
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
+            panel1.Enabled = false;
+            panel1.Visible = false;
             DashboardUIPannel.Enabled = true;
             DashboardUIPannel.Visible=true;
+            timer.Stop();
             
+            
+
         }
     }
 }
