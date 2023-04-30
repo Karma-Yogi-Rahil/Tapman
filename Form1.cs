@@ -1,4 +1,5 @@
-﻿using Guna.UI2.WinForms;
+﻿using CsvHelper;
+using Guna.UI2.WinForms;
 using Microsoft.VisualBasic.Devices;
 using OpenHardwareMonitor.Hardware;
 using System;
@@ -6,12 +7,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Tapman.Structure;
 
 namespace Tapman
 {
@@ -26,6 +29,10 @@ namespace Tapman
         private System.Management.ManagementObjectCollection storageDrives;
 
         private Timer timer;
+
+        private string StorageOne = null;
+        private string StorageTwo = null;
+
         public TapmanUI()
         {
             InitializeComponent();
@@ -34,10 +41,6 @@ namespace Tapman
 
             using (var searcher = new ManagementObjectSearcher(scope, query))
             storageDrives = searcher.Get();
-
-
-           
-
 
             computer = new OpenHardwareMonitor.Hardware.Computer();
             computer.CPUEnabled = true;
@@ -66,6 +69,8 @@ namespace Tapman
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            RecordSystemData recordSystemData = new RecordSystemData();
+            recordSystemData.RecordTimeStamo = DateTime.Now;
             // Read the temperature data and update the labels
             foreach (var hardwareItem in computer.Hardware)
             {
@@ -74,89 +79,75 @@ namespace Tapman
                 switch (hardwareItem.HardwareType)
                 {
                     case (HardwareType.CPU):
-                        UpdateCpuDetails(hardwareItem); break;
+                        UpdateCpuDetails(hardwareItem, recordSystemData); break;
 
                     case (HardwareType.RAM):
-                        UpdateRamDetails(hardwareItem); break;
+                        UpdateRamDetails(hardwareItem, recordSystemData); break;
 
                     case (HardwareType.GpuNvidia):
-                        UpdateGpuDetails(hardwareItem); break;
+                        UpdateGpuDetails(hardwareItem,recordSystemData); break;
 
-                    case (HardwareType.GpuAti): UpdateGpuDetails(hardwareItem); break;
+                    case (HardwareType.GpuAti): 
+                        UpdateGpuDetails(hardwareItem,recordSystemData); break;
 
                     case (HardwareType.HDD):
-                        UpdateStorageDetails(hardwareItem); break;
+                        UpdateStorageDetails(hardwareItem,recordSystemData); break;
 
                     case(HardwareType.Mainboard):
-                        UpdateMotherBoardDetails(hardwareItem);
+                        UpdateMotherBoardDetails(hardwareItem,recordSystemData);
                         break;
                 }
-
-                //if (hardwareItem.HardwareType == HardwareType.CPU)
-                //{
-                //    CpuNameTitle.Text = $"CPU : {hardwareItem.Name}";
-                //    foreach (var sensor in hardwareItem.Sensors)
-                //    {
-
-                //        if (sensor.SensorType == SensorType.Temperature)
-                //        {
-                //            //CpuTempLabel.Text = $"{sensor.Value.Value:N1} C";
+            }
+            WriteRecordToCsv(recordSystemData, @"C:\Users\rahil\Desktop\testing\data.csv");
+        }
 
 
-                //            try
-                //            {
-                //                var temp = ((sensor.Value));
-                //                //CpuLoadProgressBar.Maximum = (int)sensor.Max;
-                //                //CpuLoadProgressBar.Minimum = (int)sensor.Min;
-                //                //CpuTempProgressBar.Value = (int)temp;
+        private static void WriteRecordToCsv(RecordSystemData record, string filePath)
+        {
+            bool isHeaderWritten = false;
 
-                //                //    guna2HtmlToolTip1.SetToolTip(CpuLoadProgressBar,temp.ToString());
-                //                //CurrentTempLabel.Text = temp.ToString() + " °C";
-                //                //guna2HtmlLabel1.Text = temp.ToString();
-                //                //guna2HtmlLabel2.Text = sensor.Max.ToString();
-                //                //guna2GroupBox1.Text = sensor.Name.ToString();
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                //MessageBox.Show(ex.Message);
-                //            }
+            if (File.Exists(filePath))
+            {
+                // Check if the file already contains data
+                using (var reader = new StreamReader(filePath))
+                {
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        csv.Read();
+                        isHeaderWritten = csv.ReadHeader();
+                    }
+                }
+            }
 
+            // Append the record to the file
+            using (var writer = new StreamWriter(filePath, true))
+            {
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    if (!isHeaderWritten)
+                    {
+                        // Write header row
+                        csv.WriteHeader<RecordSystemData>();
+                        csv.NextRecord();
+                    }
 
-
-
-                //        }
-                //        else if (sensor.SensorType == SensorType.Load)
-                //        {
-                //            var load = ((sensor.Value));
-                //            //CpuLoadProgressBar.Value = (int)load;
-                //        }
-                //        else if (sensor.SensorType == SensorType.Voltage)
-                //        {
-                //            var fanspeed = ((sensor.Value));
-                //            //guna2CircleProgressBar1.Value = (int)fanspeed;
-                //        }
-                //    }
-                //}
-                //else if (hardwareItem.HardwareType == HardwareType.GpuNvidia || hardwareItem.HardwareType == HardwareType.GpuAti)
-                //{
-                //    foreach (var sensor in hardwareItem.Sensors)
-                //    {
-
-                //    }
-                //}
+                    // Write the record
+                    csv.WriteRecord(record);
+                    csv.NextRecord();
+                }
             }
         }
 
-
-        private void UpdateMotherBoardDetails(IHardware motherBoard)
+        private void UpdateMotherBoardDetails(IHardware motherBoard ,RecordSystemData recordSystemData)
         {
             
                 MotherBoardTitle.Text = string.Format("MainBoard : {0}", motherBoard.Name);
+            
 
 
         }
 
-        private void UpdateCpuDetails(IHardware cpu)
+        private void UpdateCpuDetails(IHardware cpu, RecordSystemData recordSystemData)
         {
             try
             {
@@ -212,11 +203,24 @@ namespace Tapman
                     }
 
                 }
+
+                recordSystemData.CpuAvgTemp = CpuAvgTempProgressBar.Value;
+                recordSystemData.CpuMaxTemp = CpuMaxTempProgressBar.Value;
+                recordSystemData.CpuMinTemp = CpuMinTempProgressBar.Value;
+                
+                recordSystemData.CpuAvgLoad = CpuAvgLoadProgressBar.Value;
+                recordSystemData.CpuMaxLoad = CpuMaxLoadProgressBar.Value;
+                recordSystemData.CpuMinLoad = CpuMinLoadProgressBar.Value;
+
+                recordSystemData.CpuAvgPower = CpuAvgPowerProgressBar.Value;
+                recordSystemData.CpuMaxPower = CpuMaxPowerProgressBar.Value;
+                recordSystemData.CpuMinPower = CpuMinPowerProgressBar.Value;
+
             }
             catch (Exception ex) { }
         }
 
-        private void UpdateRamDetails(IHardware ram)
+        private void UpdateRamDetails(IHardware ram,RecordSystemData recordSystemData)
         {
             RamNameTitle.Text = $"RAM : {ram.Name}";
             foreach (var sensor in ram.Sensors)
@@ -242,21 +246,72 @@ namespace Tapman
                 }
             }
 
-            if(RamAvgDataProgressBar.Value== RamMinDataProgressBar.Value)
-            {
-                RamAvgDataProgressBar.Animated = true;
-                RamMinDataProgressBar.Animated = true;
-            }
-           
-
+            recordSystemData.RamAvgDataUsed = RamAvgDataProgressBar.Value;
+            recordSystemData.RamMaxDataUsed = RamMaxDataProgressBar.Value;
+            recordSystemData.RamMinDataUsed = RamMinDataProgressBar.Value;
+            
+            recordSystemData.RamAvgLoad = RamAvgLoadProgressBar.Value;
+            recordSystemData.RamMaxLoad = RamMaxLoadProgressBar.Value;
+            recordSystemData.RamMinLoad = RamMinLoadProgressBar.Value;
 
         }
 
-        private void UpdateStorageDetails(IHardware storage)
+        private void UpdateStorageDetails(IHardware storage,RecordSystemData recordSystemData)
         {
             if(storageDrives.Count > 1)
             {
-                ////
+                if(StorageOne == null)
+                {
+                    StorageOne = storage.Name;
+                }
+                
+                if(StorageTwo == null)
+                {
+                    StorageTwo = storage.Name;
+                }
+
+                if(storage.Name ==  StorageOne ) 
+                {
+                    if (storage.Name.Length > 16) // Check if storage name is greater than 30 characters
+                    {
+                        StrorageName.Font = new Font(StrorageName.Font.FontFamily, 14, StrorageName.Font.Style);
+                        StorageNameTitle.Text = $"STORAGE:";
+                        StrorageName.Location = new Point(125, 13);
+                    }
+
+                        StrorageName.Text = $"{ storage.Name}";
+
+                    //StorageNameTitle.Text = $"Storage : {storage.Name}";
+                   
+                    foreach(var sensor in storage.Sensors)
+                    {
+                        if(sensor.SensorType == SensorType.Temperature)
+                        {
+                            StorageAvgTemp.Text = $"{(int)sensor.Value}°C";
+                            HddAvgTempProgressBar.Value = (int)sensor.Value;
+                            HddMaxTempProgressBar.Value = (int)sensor.Max;
+                            HddMinTempProgressBar.Value = (int)sensor.Min;
+                        }
+                        if (sensor.SensorType == SensorType.Load)
+                        {
+                            AvgStorageLoad.Text = $"{((int)sensor.Value)} %";
+                            HddAvgLoadProgressBar.Value = (int)sensor.Value;
+                            HddMaxLoadProgressBar.Value = (int)sensor.Max;
+                            HddMinLoadProgressBar.Value = (int)sensor.Min;
+                        }
+                    }
+
+                    recordSystemData.StorageAvgDataUsed = HddAvgLoadProgressBar.Value;
+                    recordSystemData.StorageMaxDataUsed = HddMaxLoadProgressBar.Value;
+                    recordSystemData.StorageMinDataUsed = HddMinLoadProgressBar.Value;
+
+                    recordSystemData.StorageAvgTemp = HddAvgTempProgressBar.Value;
+                    recordSystemData.StorageMaxTemp = HddMaxTempProgressBar.Value;
+                    recordSystemData.StorageMinTemp = HddMinLoadProgressBar.Value;
+
+
+                }
+                
 
             }
             else
@@ -268,7 +323,7 @@ namespace Tapman
 
         }
 
-        private void UpdateGpuDetails(IHardware gpu)
+        private void UpdateGpuDetails(IHardware gpu,RecordSystemData recordSystemData)
         {
             try {
 
@@ -325,6 +380,19 @@ namespace Tapman
 
                 }
 
+                recordSystemData.GpuAvgTemp = GpuAvgTempProgressBar.Value;
+                recordSystemData.GpuMaxTemp = GpuMaxTempProgressBar.Value;
+                recordSystemData.GpuMinTemp = GpuMinTempProgressBar.Value;
+
+                recordSystemData.GpuAvgLoad = GpuAvgLoadProgressBar.Value;
+                recordSystemData.GpuMaxLoad = GpuMaxLoadProgressBar.Value;
+                recordSystemData.GpuMinLoad = GpuMinLoadProgressBar.Value;
+
+                recordSystemData.GpuAvgPower = GpuAvgPowerProgressBar.Value;
+                recordSystemData.GpuMinPower = GpuMinPowerProgressBar.Value;
+                recordSystemData.GpuMaxPower = GpuMaxPowerProgressBar.Value;
+
+
 
             } catch (Exception ex) { }
         }
@@ -337,6 +405,30 @@ namespace Tapman
         private void TapmanUI_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void guna2CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(RecordData.Checked)
+            {
+
+            }
+
+        }
+
+        private void guna2ImageButton2_Click(object sender, EventArgs e)
+        {
+           DashboardUIPannel.Enabled = false;
+            DashboardUIPannel.Visible = false;
+           
+
+        }
+
+        private void guna2ImageButton1_Click(object sender, EventArgs e)
+        {
+            DashboardUIPannel.Enabled = true;
+            DashboardUIPannel.Visible=true;
+            
         }
     }
 }
